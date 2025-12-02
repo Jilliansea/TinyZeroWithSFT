@@ -21,12 +21,17 @@ import os
 
 os.environ['NCCL_DEBUG'] = 'WARN'
 os.environ['TOKENIZERS_PARALLELISM'] = 'true'
-# os.environ['TORCH_COMPILE_DISABLE'] = '1'
+# ===== 随机性设置 =====
+os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":16:8")
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
+os.environ.setdefault("PYTHONHASHSEED", "0")
+os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+import torch
+import torch.distributed as dist
+import random
 
 from verl.utils.model import compute_position_id_with_mask
-
 import pandas as pd
-
 from transformers import AutoTokenizer
 
 from verl import DataProto
@@ -34,10 +39,41 @@ from verl.utils.fs import copy_local_path_from_hdfs
 from verl.workers.fsdp_workers import ActorRolloutRefWorker
 from verl.utils.hdfs_io import makedirs
 from verl.single_controller.ray import RayClassWithInitArgs, RayResourcePool, RayWorkerGroup
+import ipdb
+
+# ===== 随机性设置 =====
+def get_rank_safe():
+    if dist.is_available() and dist.is_initialized():
+        return dist.get_rank()
+    return 0
+
+# ===== 随机性设置 =====
+def setup_seed(base_seed: int, deterministic: bool = True):
+    rank = get_rank_safe()
+    seed = int(base_seed) + int(rank)  # DDP/多进程：不同进程不同种子，但可复现实验
+    # 1) Python/NumPy/PyTorch
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+
+    # 2) 后端与 TF32
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
+    torch.backends.cudnn.benchmark = False
+    if deterministic:
+        # 新版优选这个；老版也兼容
+        torch.use_deterministic_algorithms(True)
+        # 旧接口（可保留，增强兼容）
+        torch.backends.cudnn.deterministic = True
+
+    # 3) 可选：保证 CPU 算子也尽量可复现（视需求）
+    os.environ.setdefault("PYTHONHASHSEED", "0")
 
 
 @hydra.main(config_path='config', config_name='generation', version_base=None)
 def main(config):
+    print(f"Starting generation with config: {config}")
     from pprint import pprint
     from omegaconf import OmegaConf
     pprint(OmegaConf.to_container(config, resolve=True))  # resolve=True will eval symbol values
@@ -45,20 +81,24 @@ def main(config):
     local_path = copy_local_path_from_hdfs(config.model.path)
     from verl.utils import hf_tokenizer
     tokenizer = hf_tokenizer(local_path)
+  
 
     if config.rollout.temperature == 0.:
         assert config.data.n_samples == 1, 'When temperature=0, n_samples must be 1.'
 
     # read dataset. Note that the dataset should directly contain chat template format (e.g., a list of dictionary)
     dataset = pd.read_parquet(config.data.path)
+    # # 随机抽取10000条数据
+    # dataset = dataset.sample(n=10000)
+    
     chat_lst = dataset[config.data.prompt_key].tolist()
-
     chat_lst = [chat.tolist() for chat in chat_lst]
 
     tokenizer.padding_side = 'left'
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
 
+    # ipdb.set_trace()
     ray_cls_with_init = RayClassWithInitArgs(cls=ray.remote(ActorRolloutRefWorker), config=config, role='rollout')
     resource_pool = RayResourcePool(process_on_nodes=[config.trainer.n_gpus_per_node] * config.trainer.nnodes)
     wg = RayWorkerGroup(resource_pool=resource_pool, ray_cls_with_init=ray_cls_with_init)
@@ -71,9 +111,12 @@ def main(config):
     num_batch = (total_samples // config_batch_size) + 1
     output_lst = [[] for _ in range(config.data.n_samples)]
 
+    # ipdb.set_trace()
     for batch_idx in range(num_batch):
         print(f'[{batch_idx+1}/{num_batch}] Start to process.')
         batch_chat_lst = chat_lst[batch_idx * config_batch_size:(batch_idx + 1) * config_batch_size]
+        if len(batch_chat_lst) == 0:
+            continue
         inputs = tokenizer.apply_chat_template(batch_chat_lst,
                                                add_generation_prompt=True,
                                                padding=True,
@@ -134,4 +177,7 @@ def main(config):
 
 
 if __name__ == '__main__':
+    # ===== 随机性设置 =====
+    setup_seed(0, deterministic=True)
+
     main()

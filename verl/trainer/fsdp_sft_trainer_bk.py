@@ -43,6 +43,7 @@ from torch.distributed.device_mesh import DeviceMesh
 
 import verl.utils.hdfs_io as hdfs_io
 from verl.utils.debug import log_gpu_memory_usage
+import ipdb
 
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv('VERL_SFT_LOGGING_LEVEL', 'WARN'))
@@ -92,6 +93,8 @@ class FSDPSFTTrainer(object):
     def _build_dataloader(self):
         config = self.config
         # build dataset
+        print(f"config.data.train_files: {config.data.train_files}")
+        print(f"config.data.val_files: {config.data.val_files}")
         self.train_dataset = SFTDataset(parquet_files=config.data.train_files,
                                         tokenizer=self.tokenizer,
                                         prompt_key=config.data.prompt_key,
@@ -168,9 +171,9 @@ class FSDPSFTTrainer(object):
 
         log_gpu_memory_usage('After model allocation', logger=logger)
 
-        mixed_precision = MixedPrecision(param_dtype=torch.bfloat16,
-                                         reduce_dtype=torch.float32,
-                                         buffer_dtype=torch.float32)
+        mixed_precision = MixedPrecision(param_dtype=torch.bfloat16,    # 模型参数以bfloat16存储
+                                         reduce_dtype=torch.float32,    # 梯度更新时使用float32
+                                         buffer_dtype=torch.float32)    # 缓冲区使用float32(如BN的moving mean和variance, LayerNorm的gamma和beta)
 
         auto_wrap_policy = get_fsdp_wrap_policy(self.model, config=self.config.model.fsdp_config.wrap_policy)
         if self.device_mesh.get_rank() == 0:
@@ -299,8 +302,23 @@ class FSDPSFTTrainer(object):
         with FSDP.state_dict_type(self.fsdp_model, StateDictType.FULL_STATE_DICT, cfg):
             state_dict = self.fsdp_model.state_dict()
 
+        # # delete old checkpoints
+        # if self.config.trainer.max_checkpoints > 0:
+        #     import shutil
+        #     checkpoint_dirs = [
+        #         d for d in os.listdir(self.config.trainer.default_local_dir) 
+        #         if 'global_step_' in d
+        #     ]
+        #     print(f"checkpoint_dirs: {checkpoint_dirs}")
+        #     ipdb.set_trace()
+        #     checkpoint_dirs.sort(key=lambda x: int(x.split('_')[-1]))
+        #     if len(checkpoint_dirs) > self.config.trainer.max_checkpoints:
+        #         for checkpoint_dir in checkpoint_dirs[:-self.config.trainer.max_checkpoints]:
+        #             shutil.rmtree(os.path.join(self.config.trainer.default_local_dir, checkpoint_dir))
+        #             print(f"Deleted old checkpoint: {checkpoint_dir}")
+
+        # save new checkpoint
         path = os.path.join(self.config.trainer.default_local_dir, f'global_step_{step}')
-        # save huggingface model
         if self.device_mesh.get_rank() == 0:
             os.makedirs(path, exist_ok=True)
             self.model.save_pretrained(path, state_dict=state_dict)
@@ -322,7 +340,6 @@ class FSDPSFTTrainer(object):
         global_step = 0
 
         # TODO (zhangchi.usc1992) add back checkpoint manager. Currently, it blocks when uploading to hdfs. So very slow.
-
         for epoch in range(self.config.trainer.total_epochs):
             self.train_sampler.set_epoch(epoch=epoch)
             for data in self.train_dataloader:
@@ -343,7 +360,6 @@ class FSDPSFTTrainer(object):
                 metric = {'val/loss': val_loss.detach().item()}
                 tracking.log(data=metric, step=global_step)
             torch.distributed.barrier()
-
             # save checkpoint
             self.save_checkpoint(step=global_step)
 
@@ -358,7 +374,7 @@ from verl.utils.distributed import initialize_global_process_group
 
 @hydra.main(config_path='config', config_name='sft_trainer', version_base=None)
 def main(config):
-    local_rank, rank, world_size = initialize_global_process_group()
+    local_rank, rank, world_size = initialize_global_process_group()    # 0, 0, 1
 
     device_mesh = init_device_mesh(device_type='cuda', mesh_shape=(world_size,), mesh_dim_names=('dp',))
     trainer = FSDPSFTTrainer(config=config, device_mesh=device_mesh)

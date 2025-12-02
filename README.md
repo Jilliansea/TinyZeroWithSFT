@@ -14,6 +14,12 @@ Full experiment log: https://wandb.ai/jiayipan/TinyZero
 
 > 📢: We release [Apative Parallel Reasoning](https://github.com/Parallel-Reasoning/APR), where we explore a new dimension in scaling reasoining models
 
+## Experiments [@Jillian]
+[full wandb details](https://wandb.ai/jillianwangzhihui-unc-charlotte/TinyZero/workspace) : https://wandb.ai/jillianwangzhihui-unc-charlotte/TinyZero/workspace
+
+![image](GRPO_wo_SFT_val_score.png)
+![image](GRPO_wo_SFT_response_length.png)
+
 ## Installation
 
 ```
@@ -32,6 +38,9 @@ pip3 install flash-attn --no-build-isolation
 # quality of life
 pip install wandb IPython matplotlib
 ```
+💡 Tips by Jillian: 
+* For detailed environment configuration, please refer to pip_list.txt.
+* ⚠️ Please commend ’source ./fix_environment.sh‘ in shell files, it depends on different env.
 
 ## Countdown task
 
@@ -74,29 +83,72 @@ export ROLLOUT_TP_SIZE=2
 export EXPERIMENT_NAME=countdown-qwen2.5-3b
 export VLLM_ATTENTION_BACKEND=XFORMERS
 
-bash ./scripts/train_tiny_zero.sh
+bash scripts/train_tiny_zero.sh
 ```
 
-### Instruct Ablation
-We experiment with QWen-2.5-3B Instruct too.
-**Data Preparation**
-To follow chat template, we need to reprocess the data:
+**train GRPO [@Jillian]** 
+```
+bash train_3b_grpo.sh 
+```
+**train PPO [@Jillian]**
+```
+bash train_3b_ppo.sh 
+```
+
+### Run Generation [@Jillian]
 ```
 conda activate zero
-python examples/data_preprocess/countdown.py --template_type=qwen-instruct --local_dir={path_to_your_dataset}
+
+bash scripts/inference_ppo.sh
+```
+
+### Run Evaluation [@Jillian]
+```
+conda activate zero
+
+bash scripts/eval_ppo.sh ${data_path} ${output_dir}
+```
+
+
+
+## 💡SFT of Qwen2.5-3B [@Jillian]
+**Data Preparation**
+
+I use [HuggingFaceTB/Countdown-Task-GOLD](https://huggingface.co/datasets/HuggingFaceTB/Countdown-Task-GOLD) for SFT, and
+* Fine-tuning Data: The 3B model was primarily fine-tuned on a dataset synthesized by the verified_Qwen2.5-7B-Instructand, verified_Qwen3-4B-Instruct-2507models.
+* Arithmetic Data Balancing: To improve performance on multiplication and division, the ratio of arithmetic operations in the training data was set to 4 (+, -) : 3 (*) : 3 (/).
+* Dataset Scale: The training and testing sets contain 18,000 and 1,024 samples, respectively.
+* Train model: Qwen2.5-3B
+
+```
+conda activate zero
+python python ./examples/data_preprocess/countdown_sft.py --local_dir {path_to_your_dataset}
 ```
 
 **Training**
 ```
-export N_GPUS=2
-export BASE_MODEL={path_to_your_model}
-export DATA_DIR={path_to_your_dataset}
-export ROLLOUT_TP_SIZE=2
-export EXPERIMENT_NAME=countdown-qwen2.5-3b-instruct
-export VLLM_ATTENTION_BACKEND=XFORMERS
+conda activate zero
 
-bash ./scripts/train_tiny_zero.sh
+bash train_sft_qwen2.5_3b.sh 4
 ```
+![image](SFT_loss.png)
+
+
+**Generate**
+```
+conda activate zero
+
+bash scripts/inference_sft.sh ${model_path}
+```
+
+**Evaluation**
+```
+conda activate zero
+
+bash scripts/eval_sft.sh ${data_path} ${output_dir}
+```
+
+
 
 ## Acknowledge
 * We run our experiments based on [veRL](https://github.com/volcengine/verl).

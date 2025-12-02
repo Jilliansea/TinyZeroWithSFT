@@ -1,0 +1,27 @@
+model:
+  # SFT 后模型的 HF 格式目录（你训练产生的 checkpoint）
+  path: /users/gwang16/Jillian/TinyZero/checkpoints/countdown-sft-qwen2.5-3b/
+  # tokenizer 也从 SFT ckpt 里读（与 Qwen 一致）
+  name_or_path: Qwen/Qwen2.5-3B
+  tokenizer_from_sft: true        # 用 SFT ckpt 里的 tokenizer
+
+data:
+  # 要做推理的数据（通常是 test parquet）
+  path: hdfs:///users/gwang16/Jillian/TinyZero/data/countdown_sft/test.parquet
+  prompt_key: prompt
+  # data_source_key: data_source
+  # reward_model_key: reward_model
+
+  # 输入/输出长度
+  max_input_length: 2048
+  max_new_tokens: 1024
+
+  # 生成超参数
+  batch_size: 8
+  temperature: 1.0
+  top_p: 0.7
+  top_k: 50
+
+output:
+  # 生成结果保存路径（parquet）
+  path: hdfs:///users/gwang16/Jillian/TinyZero/experiments/countdown/sft_qwen2.5-3b/outputs.parquet

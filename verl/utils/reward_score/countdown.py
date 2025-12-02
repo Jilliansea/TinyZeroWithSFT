@@ -82,7 +82,14 @@ def compute_score(solution_str, ground_truth, method='strict', format_score=0.1,
         if do_print:
             print(f"No equation found")
         return 0
-    
+    '''
+    format_score=0.1：
+    1. 输出numbers中的数字与equation中的数字不同，
+    2. 输出equation不合法；
+    3. 输出equation计算结果不等于target
+    score=1.：
+    1. 输出numbers中的数字与equation中的数字相同 & equation合法 & equation计算结果等于target;
+    '''
     # Validate equation uses correct numbers
     if not validate_equation(equation, numbers):
         if do_print:
@@ -109,3 +116,66 @@ def compute_score(solution_str, ground_truth, method='strict', format_score=0.1,
         if do_print:
             print(f"Error evaluating equation")
         return format_score 
+
+
+def compute_score_for_analysis(solution_str, ground_truth, method='strict', format_score=0.1, score=1.):
+    """The scoring function for countdown task.
+    
+    Args:
+        solution_str: the solution text
+        ground_truth: dictionary containing target number and available numbers
+        method: the method to extract the solution
+        format_score: the score for correct format but wrong answer
+        score: the score for the correct answer
+    """
+    target = ground_truth['target']
+    numbers = ground_truth['numbers']
+    
+    equation = extract_solution(solution_str=solution_str)
+    do_print = random.randint(1, 64) == 1
+    
+    if do_print:
+        print(f"--------------------------------")
+        print(f"Target: {target} | Numbers: {numbers}")
+        print(f"Extracted equation: {equation}")
+        print(f"Solution string: {solution_str}")
+
+    if equation is None:
+        if do_print:
+            print(f"No equation found")
+        return 0, "NoEquationFound"
+
+    '''
+    format_score=0.1：
+    1. 输出numbers中的数字与equation中的数字不同，
+    2. 输出equation不合法；
+    3. 输出equation计算结果不等于target
+    score=1.：
+    1. 输出numbers中的数字与equation中的数字相同 & equation合法 & equation计算结果等于target;
+    '''
+    # Validate equation uses correct numbers
+    if not validate_equation(equation, numbers):
+        if do_print:
+            print(f"Invalid equation")
+        return format_score, "InvalidEquation"
+        
+    # Evaluate equation
+    try:
+        result = evaluate_equation(equation)
+        if result is None:
+            if do_print:
+                print(f"Could not evaluate equation")
+            return format_score, "CouldNotEvaluateEquation"
+            
+        if abs(result - target) < 1e-5:  # Account for floating point precision
+            if do_print:
+                print(f"Correct equation: {equation} = {result}")
+            return score, "CorrectEquation"
+        else:
+            if do_print:
+                print(f"Wrong result: equation = {result}, target = {target}")
+            return format_score, "WrongResult"
+    except:
+        if do_print:
+            print(f"Error evaluating equation")
+        return format_score, "ErrorEvaluatingEquation"

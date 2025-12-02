@@ -1,0 +1,200 @@
+[2025-11-12 15:30:33,020 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:33,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:33,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:33,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:33,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:33,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:33,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:33,214 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:33,220 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:33,420 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:33,620 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:33,820 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:33,851 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:33,990 D 755291 755291] (gcs_server) gcs_health_check_manager.cc:198: Health check status: SERVING
+[2025-11-12 15:30:33,991 W 755455 755455] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2025-11-12 15:30:33,998 D 755455 755533] (raylet) metric_exporter.cc:100: Exporting metrics, metrics: 49, payload size: 21745
+[2025-11-12 15:30:34,020 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:34,215 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:34,220 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:34,420 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:34,620 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:34,820 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:34,851 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:35,020 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:35,215 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:35,220 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:35,421 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:35,621 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:35,821 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:35,851 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:36,021 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:36,215 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:36,221 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+2025-11-12 15:30:36,230	INFO (monitor) autoscaler.py:147 -- The autoscaler took 0.0 seconds to fetch the list of non-terminated nodes.
+2025-11-12 15:30:36,230	INFO (monitor) autoscaler.py:408 -- 
+======== Autoscaler status: 2025-11-12 15:30:36.230510 ========
+Node status
+---------------------------------------------------------------
+Active:
+ 1 node_967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Total Usage:
+ 0.0/32.0 CPU
+ 0.0/1.0 GPU
+ 0B/164.95GiB memory
+ 0B/70.69GiB object_store_memory
+
+From request_resources:
+ (none)
+Pending Demands:
+ (no resource demands)
+2025-11-12 15:30:36,231	INFO (monitor) autoscaler.py:463 -- The autoscaler took 0.001 seconds to complete the update iteration.
+[2025-11-12 15:30:36,421 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:36,621 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:36,821 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:36,852 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:36,990 D 755291 755291] (gcs_server) gcs_health_check_manager.cc:198: Health check status: SERVING
+[2025-11-12 15:30:37,021 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:37,215 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:37,221 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:37,421 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:37,621 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:37,821 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:37,852 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:37,887 D 755291 755339] (gcs_server) metric_exporter.cc:100: Exporting metrics, metrics: 45, payload size: 35777
+[2025-11-12 15:30:38,021 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:38,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:38,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:38,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:38,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:38,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:38,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:38,185 E 755291 755291] (gcs_server) gcs_server.cc:302: Failed to establish connection to the event+metrics exporter agent. Events and metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[2025-11-12 15:30:38,185 E 755291 755291] (gcs_server) gcs_server.cc:302: Failed to establish connection to the event+metrics exporter agent. Events and metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[2025-11-12 15:30:38,215 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:38,221 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:38,421 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:38,621 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:38,822 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:38,852 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:38,994 W 755455 755455] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2025-11-12 15:30:39,022 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:39,216 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:39,222 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:39,422 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:39,622 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:39,822 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:39,852 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:39,991 D 755291 755291] (gcs_server) gcs_health_check_manager.cc:198: Health check status: SERVING
+[2025-11-12 15:30:40,023 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:40,216 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:40,223 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:40,423 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:40,623 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:40,824 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:40,853 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:41,024 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:41,216 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:41,225 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+2025-11-12 15:30:41,238	INFO (monitor) autoscaler.py:147 -- The autoscaler took 0.0 seconds to fetch the list of non-terminated nodes.
+2025-11-12 15:30:41,238	INFO (monitor) autoscaler.py:408 -- 
+======== Autoscaler status: 2025-11-12 15:30:41.238371 ========
+Node status
+---------------------------------------------------------------
+Active:
+ 1 node_967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+Pending:
+ (no pending nodes)
+Recent failures:
+ (no failures)
+
+Resources
+---------------------------------------------------------------
+Total Usage:
+ 0.0/32.0 CPU
+ 0.0/1.0 GPU
+ 0B/164.95GiB memory
+ 0B/70.69GiB object_store_memory
+
+From request_resources:
+ (none)
+Pending Demands:
+ (no resource demands)
+2025-11-12 15:30:41,239	INFO (monitor) autoscaler.py:463 -- The autoscaler took 0.001 seconds to complete the update iteration.
+[2025-11-12 15:30:41,425 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:41,625 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:41,825 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:41,853 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:42,025 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:42,218 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:42,225 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:42,425 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:42,625 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:42,825 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:42,853 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:42,992 D 755291 755291] (gcs_server) gcs_health_check_manager.cc:198: Health check status: SERVING
+[2025-11-12 15:30:43,025 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+2025-11-12 15:30:43,114	INFO (dashboard_agent) utils.py:305 -- Get all modules by type: DashboardAgentModule
+[2025-11-12 15:30:43,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:43,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:43,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:43,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:43,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:43,181 D 755291 755291] (gcs_server) usage_stats_client.cc:32: Did not add new extra usage tag, maybe overwritten
+[2025-11-12 15:30:43,218 I 755455 755455] (raylet) runtime_env_agent_client.cc:344: Runtime Env Agent network error: NotFound: on_connect Connection refused, the server may be still starting or is already failed. Scheduling a retry in 1000ms...
+[2025-11-12 15:30:43,225 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:43,426 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:43,626 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:43,826 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:43,853 D 755291 755291] (gcs_server) gcs_placement_group_manager.cc:302: No additional placement groups to schedule. Stop scheduling.
+[2025-11-12 15:30:43,993 E 755455 755455] (raylet) main.cc:975: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[2025-11-12 15:30:43,993 E 755455 755455] (raylet) main.cc:975: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[2025-11-12 15:30:43,996 W 755455 755455] (raylet) memory_monitor.cc:197: Got negative used memory for cgroup -1, setting it to zero
+[2025-11-12 15:30:44,018 D 755455 755533] (raylet) metric_exporter.cc:100: Exporting metrics, metrics: 49, payload size: 21900
+[2025-11-12 15:30:44,026 D 755455 755455] (raylet) worker_pool.cc:1196: Idle workers: 0, idle workers that are eligible to kill: 0, num desired workers : 32
+[2025-11-12 15:30:44,222 E 755455 755455] (raylet) runtime_env_agent_client.cc:339: Runtime Env Agent timed out in 30000ms. Status: NotFound: on_connect Connection refused, address: 192.168.175.13, port: 39656, existing immediately...
+[2025-11-12 15:30:44,222 E 755455 755455] (raylet) runtime_env_agent_client.cc:339: Runtime Env Agent timed out in 30000ms. Status: NotFound: on_connect Connection refused, address: 192.168.175.13, port: 39656, existing immediately...
+[2025-11-12 15:30:44,222 E 755455 755455] (raylet) runtime_env_agent_client.cc:295: The raylet exited immediately because the runtime env agent timed out when Raylet try to connect to it. This can happen because the runtime env agent was never started, or is listening to the wrong port. Read the log `cat /tmp/ray/session_latest/logs/runtime_env_agent.log`. You can find the log file structure here https://docs.ray.io/en/master/ray-observability/user-guides/configure-logging.html#logging-directory-structure.
+
+[2025-11-12 15:30:44,222 E 755455 755455] (raylet) runtime_env_agent_client.cc:295: The raylet exited immediately because the runtime env agent timed out when Raylet try to connect to it. This can happen because the runtime env agent was never started, or is listening to the wrong port. Read the log `cat /tmp/ray/session_latest/logs/runtime_env_agent.log`. You can find the log file structure here https://docs.ray.io/en/master/ray-observability/user-guides/configure-logging.html#logging-directory-structure.
+
+[2025-11-12 15:30:44,222 I 755455 755455] (raylet) main.cc:412: Raylet graceful shutdown triggered with death info: reason: UNEXPECTED_TERMINATION
+reason_message: "Raylet could not connect to Runtime Env Agent"
+
+[2025-11-12 15:30:44,222 I 755455 755455] (raylet) accessor.cc:493: Unregistering node node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+[2025-11-12 15:30:44,223 D 755291 755291] (gcs_server) gcs_node_manager.cc:173: HandleUnregisterNode() for node node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+[2025-11-12 15:30:44,224 I 755291 755291] (gcs_server) gcs_node_manager.cc:597: , death reason = UNEXPECTED_TERMINATION, death message = Raylet could not connect to Runtime Env Agent node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825 node_name=192.168.175.13
+[2025-11-12 15:30:44,224 W 755291 755291] (gcs_server) gcs_node_manager.cc:624: The node with node id: 967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825 and address: 192.168.175.13 and node name: 192.168.175.13 has been marked dead because the detector has missed too many heartbeats from it. This can happen when a 	(1) raylet crashes unexpectedly (OOM, etc.) 
+	(2) raylet has lagging heartbeats due to slow network or busy workload.
+[2025-11-12 15:30:44,224 I 755291 755291] (gcs_server) gcs_placement_group_manager.cc:685: Node is dead, rescheduling the placement groups on the dead node. node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+[2025-11-12 15:30:44,224 D 755291 755291] (gcs_server) gcs_actor_manager.cc:1224: Node is dead, reconstructing actors. node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+[2025-11-12 15:30:44,224 I 755291 755291] (gcs_server) gcs_job_manager.cc:489: Node is dead, marking all jobs with drivers on this node as finished. node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+[2025-11-12 15:30:44,224 D 755291 755291] (gcs_server) publisher.cc:301: enqueue: 5
+[2025-11-12 15:30:44,224 I 755455 755455] (raylet) accessor.cc:501: Finished unregistering node info, status = OK node_id=967cbc95135b22c8f4b321857351303acfb9c85169fd67ce5300a825
+[2025-11-12 15:30:44,225 W 755455 755479] (raylet) store.cc:366: Disconnecting client due to connection error with code 2: End of file
+[2025-11-12 15:30:44,225 D 755455 755479] (raylet) store.cc:333: Disconnecting client on fd -1
+[2025-11-12 15:30:44,227 D 755455 755455] (raylet) grpc_server.cc:59: gRPC server of ObjectManager shutdown.
+[2025-11-12 15:30:44,227 D 755455 755455] (raylet) periodical_runner.cc:30: PeriodicalRunner is destructed
+[2025-11-12 15:30:44,227 I 755455 755455] (raylet) agent_manager.cc:116: Killing agent dashboard_agent, pid 755526.
+[2025-11-12 15:30:44,300 I 755455 755527] (raylet) agent_manager.cc:83: Agent process with name dashboard_agent exited, exit code 0.
+[2025-11-12 15:30:44,300 I 755455 755455] (raylet) agent_manager.cc:116: Killing agent runtime_env_agent, pid 755528.
+[2025-11-12 15:30:44,500 I 755455 755529] (raylet) agent_manager.cc:83: Agent process with name runtime_env_agent exited, exit code 0.
+[2025-11-12 15:30:44,501 I 755455 755455] (raylet) io_service_pool.cc:49: IOServicePool is stopped.
+[2025-11-12 15:30:44,623 I 755455 755455] (raylet) stats.h:149: Stats module has shutdown.
+[2025-11-12 15:30:44,623 D 755455 755455] (raylet) periodical_runner.cc:30: PeriodicalRunner is destructed
+[2025-11-12 15:30:44,624 D 755455 755455] (raylet) periodical_runner.cc:30: PeriodicalRunner is destructed
+[2025-11-12 15:30:44,641 D 755455 755455] (raylet) periodical_runner.cc:30: PeriodicalRunner is destructed
+[2025-11-12 15:30:44,641 D 755455 755455] (raylet) periodical_runner.cc:30: PeriodicalRunner is destructed
+[2025-11-12 15:30:44,646 D 755455 755455] (raylet) grpc_server.cc:59: gRPC server of NodeManager shutdown.
+[2025-11-12 15:30:44,646 D 755455 755455] (raylet) periodical_runner.cc:30: PeriodicalRunner is destructed
+[2025-11-12 15:30:44,647 D 755455 755455] (raylet) logging.cc:436: Uninstall signal handlers.
+[2025-11-12 15:30:44,647 E 755285 755285] (python-core-driver-01000000ffffffffffffffffffffffffffffffffffffffffffffffff) core_worker_process.cc:223: Failed to register worker to Raylet: IOError: Failed to read data from the socket: End of file worker_id=01000000ffffffffffffffffffffffffffffffffffffffffffffffff
+[2025-11-12 15:30:44,647 E 755285 755285] (python-core-driver-01000000ffffffffffffffffffffffffffffffffffffffffffffffff) core_worker_process.cc:223: Failed to register worker to Raylet: IOError: Failed to read data from the socket: End of file worker_id=01000000ffffffffffffffffffffffffffffffffffffffffffffffff
+[2025-11-12 15:30:44,647 D 755285 755285] (python-core-driver-01000000ffffffffffffffffffffffffffffffffffffffffffffffff) logging.cc:436: Uninstall signal handlers.

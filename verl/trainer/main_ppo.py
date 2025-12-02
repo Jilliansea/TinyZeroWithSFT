@@ -99,6 +99,9 @@ def main(config):
     if not ray.is_initialized():
         # this is for local ray cluster
         ray.init(runtime_env={'env_vars': {'TOKENIZERS_PARALLELISM': 'true', 'NCCL_DEBUG': 'WARN'}})
+        print("-----Ray initialized-----")
+    else:
+        print("-----Ray already initialized-----")
 
     ray.get(main_task.remote(config))
 
@@ -111,17 +114,23 @@ def main_task(config):
     # print initial config
     from pprint import pprint
     from omegaconf import OmegaConf
+    print("-----Config:-----")
     pprint(OmegaConf.to_container(config, resolve=True))  # resolve=True will eval symbol values
     OmegaConf.resolve(config)
+    print("-----Config resolved-----")
 
     # download the checkpoint from hdfs
     local_path = copy_local_path_from_hdfs(config.actor_rollout_ref.model.path)
-
+    print("-----Local path:-----")
+    print(local_path)
     # instantiate tokenizer
     from verl.utils import hf_tokenizer
     tokenizer = hf_tokenizer(local_path)
-
+    print("-----Tokenizer:-----")
+    print(tokenizer)
     # define worker classes
+    print("-----Actor rollout ref actor strategy:-----")
+    print(config.actor_rollout_ref.actor.strategy)
     if config.actor_rollout_ref.actor.strategy == 'fsdp':
         assert config.actor_rollout_ref.actor.strategy == config.critic.strategy
         from verl.workers.fsdp_workers import ActorRolloutRefWorker, CriticWorker
@@ -136,15 +145,16 @@ def main_task(config):
 
     else:
         raise NotImplementedError
-
+    print("-----Ray worker group class:-----")
+    print(ray_worker_group_cls)
     from verl.trainer.ppo.ray_trainer import ResourcePoolManager, Role
 
     role_worker_mapping = {
-        Role.ActorRollout: ray.remote(ActorRolloutRefWorker),
-        Role.Critic: ray.remote(CriticWorker),
-        Role.RefPolicy: ray.remote(ActorRolloutRefWorker)
+        Role.ActorRollout: ray.remote(ActorRolloutRefWorker),   # ActorRollout: 执行策略并生成经验数据
+        Role.Critic: ray.remote(CriticWorker),  # Critic: 评估动作价值
+        Role.RefPolicy: ray.remote(ActorRolloutRefWorker)   # RefPolicy: 参考策略
     }
-
+    print("-----Role worker mapping:-----")
     global_pool_id = 'global_pool'
     resource_pool_spec = {
         global_pool_id: [config.trainer.n_gpus_per_node] * config.trainer.nnodes,
@@ -154,6 +164,8 @@ def main_task(config):
         Role.Critic: global_pool_id,
         Role.RefPolicy: global_pool_id,
     }
+    print("Mapping:")
+    print(mapping)
 
     # we should adopt a multi-source reward function here
     # - for rule-based rm, we directly call a reward score
@@ -161,6 +173,10 @@ def main_task(config):
     # - for code related prompt, we send to a sandbox if there are test cases
     # - finally, we combine all the rewards together
     # - The reward type depends on the tag of the data
+    print("-----Reward model enable:-----")
+    print(config.reward_model.enable)
+    print("-----Reward model strategy:-----")
+    print(config.reward_model.strategy)
     if config.reward_model.enable:
         if config.reward_model.strategy == 'fsdp':
             from verl.workers.fsdp_workers import RewardModelWorker
@@ -177,7 +193,7 @@ def main_task(config):
     val_reward_fn = RewardManager(tokenizer=tokenizer, num_examine=1)
 
     resource_pool_manager = ResourcePoolManager(resource_pool_spec=resource_pool_spec, mapping=mapping)
-
+    print("-----Resource pool manager:-----")
     trainer = RayPPOTrainer(config=config,
                             tokenizer=tokenizer,
                             role_worker_mapping=role_worker_mapping,
@@ -187,6 +203,7 @@ def main_task(config):
                             val_reward_fn=val_reward_fn)
     trainer.init_workers()
     trainer.fit()
+    print("Trainer fit completed")
 
 
 if __name__ == '__main__':

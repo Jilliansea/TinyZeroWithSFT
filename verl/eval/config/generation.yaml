@@ -33,3 +33,7 @@ rollout:
   log_prob_micro_batch_size: 8
   # for hf rollout
   do_sample: True
+  n: 1
+
+actor:
+  ulysses_sequence_parallel_size: 1

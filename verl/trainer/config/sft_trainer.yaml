@@ -28,11 +28,13 @@ optim:
 
 trainer:
   default_local_dir: /tmp/sft_model
-  default_hdfs_dir: hdfs://tmp/experiments/gsm8k/gemma-1.1-7b-it/ # change the hdfs path here
+  default_hdfs_dir: None # change the hdfs path here
   resume_path: null
   project_name: gsm8k-sft
   experiment_name: test
   total_epochs: 4
   logger: ['console']
   seed: 1
+  save_every_steps: 2
+  val_every_steps: 100
 

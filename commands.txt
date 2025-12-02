@@ -1,0 +1,2 @@
+ray stop --force || true  
+rm -rf /tmp/ray

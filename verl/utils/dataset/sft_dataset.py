@@ -21,6 +21,7 @@ Each parquet file contains
 from typing import List, Union
 
 import pandas as pd
+import numpy as np
 
 import torch
 from torch.utils.data import Dataset
@@ -29,7 +30,7 @@ from transformers import AutoTokenizer, PreTrainedTokenizer
 from verl.utils.fs import copy_local_path_from_hdfs
 from verl.utils.model import compute_position_id_with_mask
 from verl.utils import hf_tokenizer
-
+import ipdb
 
 class SFTDataset(Dataset):
     """
@@ -84,7 +85,14 @@ class SFTDataset(Dataset):
             dataframe = pd.read_parquet(parquet_file)
             dataframes.append(dataframe)
         self.dataframe = pd.concat(dataframes)
-        self.prompts = self.dataframe[self.prompt_key]
+        # # 截取100个
+        # self.dataframe = self.dataframe.head(1000)
+
+        # If prompt_key is a list, take the first element to get a Series
+        # DataFrame[list] returns DataFrame, but we need Series for tolist()
+        prompt_key = self.prompt_key[0] if isinstance(self.prompt_key, list) else self.prompt_key
+        self.prompts = self.dataframe[prompt_key]
+
         for key in self.prompt_dict_keys:
             # type(x): pandas.core.series.Series
             # type(x[0]): numpy.ndarray
@@ -94,8 +102,15 @@ class SFTDataset(Dataset):
             except Exception:
                 print(f'self.prompts={self.prompts}')
                 raise
+
         self.prompts = self.prompts.tolist()
-        self.responses = self.dataframe[self.response_key]
+        # ipdb.set_trace()
+
+        # If response_key is a list, take the first element to get a Series
+        # DataFrame[list] returns DataFrame, but we need Series for tolist()
+        response_key = self.response_key[0] if isinstance(self.response_key, list) else self.response_key
+        self.responses = self.dataframe[response_key]
+
         for key in self.response_dict_keys:
             try:
                 self.responses = self.responses.apply(lambda x: series_to_item(x)[key], axis=1)
@@ -112,13 +127,60 @@ class SFTDataset(Dataset):
 
         prompt = self.prompts[item]
         response = self.responses[item]
+        # ipdb.set_trace()
+        '''
+        if isinstance(prompt, (list, tuple)):
+            prompt_list = list(prompt)
+        elif isinstance(prompt, np.ndarray):
+            prompt_list = prompt.tolist()
+        else:
+            prompt_list = [prompt]
 
+        # prompt_list 现在应该是 python list
+        # extract text
+        if len(prompt_list) == 1 and isinstance(prompt_list[0], dict) and "content" in prompt_list[0]:
+            prompt_text = prompt_list[0]["content"]
+        else:
+            prompt_text = str(prompt_list)
+
+        prompt_chat_str = prompt_text
+
+        print(f"prompt_chat_str: {prompt_chat_str}")
+        # 注意：这里**不要再调用** tokenizer.apply_chat_template
         # apply chat template
-        prompt_chat = [{'role': 'user', 'content': prompt}]
-
+        # prompt_chat = [{'role': 'user', 'content': prompt}]
         # string
-        prompt_chat_str = tokenizer.apply_chat_template(prompt_chat, add_generation_prompt=True, tokenize=False)
+        # prompt_chat_str = tokenizer.apply_chat_template(prompt_chat, add_generation_prompt=True, tokenize=False)
         response_chat_str = response + tokenizer.eos_token
+        print(f"response_chat_str: {response_chat_str}")
+        # ipdb.set_trace()
+        '''
+        # -------- 1) 统一 prompt 为 python list / str --------
+        # parquet 读出来常常是 numpy.ndarray([dict], dtype=object)
+        # ipdb.set_trace()
+        if isinstance(prompt, np.ndarray):
+            prompt = prompt.tolist()
+
+        # countdown_sft: prompt 是 [{'role': 'user', 'content': '...<think>'}]
+        if isinstance(prompt, list) and len(prompt) == 1 and isinstance(prompt[0], dict) and "content" in prompt[0]:
+            prompt_text = prompt[0]["content"]
+        elif isinstance(prompt, str):
+            prompt_text = prompt
+        else:
+            # 兜底：全部转成字符串
+            prompt_text = str(prompt)
+
+        # -------- 2) 统一 response 为字符串 --------
+        if isinstance(response, str):
+            response_text = response
+        else:
+            response_text = str(response)
+
+        # 这里 response_text 已经是不带开头 <think> 的版本（通过 build_sft 处理）
+        prompt_chat_str = prompt_text
+        response_chat_str = response_text + tokenizer.eos_token
+
+
 
         # tokenize
         prompt_ids_output = tokenizer(prompt_chat_str, return_tensors='pt', add_special_tokens=False)
