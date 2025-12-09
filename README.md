@@ -17,7 +17,7 @@ Full experiment log: https://wandb.ai/jiayipan/TinyZero
 ## Experiments [@Jillian]
 [full wandb details](https://wandb.ai/jillianwangzhihui-unc-charlotte/TinyZero/workspace) : https://wandb.ai/jillianwangzhihui-unc-charlotte/TinyZero/workspace
 
-![image](GRPO_wo_SFT_val_score.png)
+![image](qwen2.5-3b_PPO_GRPO_GRPO-SFT.png)
 ![image](GRPO_wo_SFT_response_length.png)
 
 ## Installation
